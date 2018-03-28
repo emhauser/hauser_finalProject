@@ -1,0 +1,39 @@
+---
+title: "Root responses to phosphorus fractions"
+author: "Emma Hauser"
+params:
+  today: !r.Sys.Date
+#bibliography: HW2_Refs.bib
+output: html_document
+---
+
+#Project Goal:
+  Examine the correlation between different different soil phosphorus fractions and the carbon-based root exudates present in those same soils. This will allow for determination of plant investment in certain nutrient pools at different soil depths. 
+  
+#Topmost Design
+  First I will need to import the data. Some of my data is in a .csv, while some is in a pdf. I would like to scrape the data from the pdf and append it to the .csv. For this I will have a function `data_import` that takes arguments specifying the pdf and the csv and merges them according the common colums of soil site/depth.
+  `data_import <- function(pdf,csv)`
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
