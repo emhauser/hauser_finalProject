@@ -1,0 +1,23 @@
+---
+title: "Hauser_Tests"
+author: "Emma Hauser"
+params:
+  today: !r.Sys.Date
+#bibliography: HW2_Refs.bib
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+arg1<-
+arg2 <- 
+h <- function(arg1, arg2)
+if(h meets expectations)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
+
