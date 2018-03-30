@@ -6,13 +6,31 @@ params:
 #bibliography: HW2_Refs.bib
 output: html_document
 ---
+##Tests for data_import function##
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-arg1<-
-arg2 <- 
-h <- function(arg1, arg2)
-if(h meets expectations)
+```{r Data_Import_sourced, echo=T}
+source("Data_Import_Function.R")
+```
+
+###Test if data_import makes a data.frame object##
+```{r DataImport_Test, echo=TRUE}
+test <- data_import("NameOfCSV", "PDFData")
+if(typeof(test) == data.frame)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
+
+###Test that data_import makes dataframe of correct dimensions
+
+```{r DataImport_Test, echo=TRUE}
+ExpectRows <- 42
+ExpectCols <- 16
+test <- data_import("NameOfCSV", "PDFData")
+if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 {
   print("passed")
 }else
