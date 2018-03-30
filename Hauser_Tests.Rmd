@@ -6,13 +6,13 @@ params:
 #bibliography: HW2_Refs.bib
 output: html_document
 ---
-##Tests for data_import function##
+##Tests for data_import function
 
 ```{r Data_Import_sourced, echo=T}
 source("Data_Import_Function.R")
 ```
 
-###Test if data_import makes a data.frame object##
+###Test if data_import makes a data.frame object
 ```{r DataImport_Test, echo=TRUE}
 test <- data_import("NameOfCSV", "PDFData")
 if(typeof(test) == data.frame)
@@ -26,7 +26,7 @@ if(typeof(test) == data.frame)
 
 ###Test that data_import makes dataframe of correct dimensions
 
-```{r DataImport_Test, echo=TRUE}
+```{r DataImport_Test_2, echo=TRUE}
 ExpectRows <- 42
 ExpectCols <- 16
 test <- data_import("NameOfCSV", "PDFData")
@@ -39,3 +39,51 @@ if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 }
 ```
 
+
+##Tests for soil_stats function
+
+###Test that soil_stats makes dataframe of correct dimensions
+```{r soil_stats_1, echo=TRUE}
+ExpectRowsSoil <- 12
+ExpectColsSoil <- 5
+testStats <- soil_stats(test)
+if(ncol(testStats) == ExpectColsSoil && nrow(testStats) == ExpectRowsSoil)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
+
+###Test that soil_stats calculates means correctly
+
+```{r soil_stats_2, echo=TRUE}
+ExpectMean <- 4.713 #this is the first mean, which should be in the first column of response variables, column 3, row 1
+testStats2 <- soil_stats(test)
+if(testStats2[1,3]==ExpectMean)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
+
+###Test that soil_stats calculates realistic correlation value
+
+```{r soil_stats_3, echo=TRUE}
+correlRangeMin <- -1
+correlRangeMax <- 1
+testStats3 <- soil_stats(test)
+if(testStats3[,5] > correlRangeMin && testStats3[,5] < correlRangeMax)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
+
+
+##Tests for soil_plot function
