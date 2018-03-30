@@ -42,6 +42,10 @@ if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 
 ##Tests for soil_stats function
 
+```{r soil_stats_sourced, echo=T}
+source("Soil_Stats_function.R")
+```
+
 ###Test that soil_stats makes dataframe of correct dimensions
 ```{r soil_stats_1, echo=TRUE}
 ExpectRowsSoil <- 12
@@ -87,3 +91,39 @@ if(testStats3[,5] > correlRangeMin && testStats3[,5] < correlRangeMax)
 
 
 ##Tests for soil_plot function
+
+```{r Soil_plot_sourced, echo=T}
+source("SoilDataPlottingFunction.R")
+install.packages("testthat")
+library(testthat) #This test will make use of the testthat package and function, which is used for examining plot elements and expectations, particularly for graphs produced in ggplot2 
+```
+
+
+###Test that soil_plot function returns a ggplot object
+
+```{r soil_plot_1, echo=TRUE}
+testplot <- soil_plot(test)
+
+#test_that("Plot returns ggplot object",
+#{
+#Passes
+  #expect_is(testplot,"ggplot")
+#})
+
+#The testthat() function returns red numbered "Failure" messages with description of the problem when expectation is not met. If the test passes, the function displays a green dot. 
+#Resource for this function: https://journal.r-project.org/archive/2011/RJ-2011-002/RJ-2011-002.pdf
+```
+
+
+###Test that soil_plot function uses correct data
+
+```{r soil_plot_2, echo=TRUE}
+testplot2 <- soil_plot(test)
+
+#test_that("Plot uses correct data", 
+#{
+  #Passes
+  #expect_that(testplot2, equals(test$responseData))
+#})
+
+```
