@@ -12,9 +12,9 @@ output: html_document
 source("Data_Import_Function.R")
 ```
 
-###Test if data_import makes a data.frame object
+###Test if data_import makes data.frame objects
 ```{r DataImport_Test, echo=TRUE}
-NameOfCSV <- dummy.csv.file
+NameOfCSV <- c("dummy.csv.file1","dummy.csv.file2")
 test <- data_import("NameOfCSV")
 if(typeof(test) == data.frame)
 {
@@ -25,12 +25,12 @@ if(typeof(test) == data.frame)
 }
 ```
 
-###Test that data_import makes dataframe of correct dimensions
+###Test that data_import makes dataframes of correct dimensions
 
 ```{r DataImport_Test_2, echo=TRUE}
 ExpectRows <- 42
 ExpectCols <- 16
-test <- data_import("NameOfCSV")
+test <- data_import("NameOfCSV[1]")
 if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 {
   print("passed")
@@ -41,7 +41,26 @@ if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 ```
 
 
+##Test for Data_fill function
 
+```{r Data_Extrapolate_sourced, echo=T}
+source("Data_Extrapolate_Function.R")
+```
+
+###Test that function produces a dataframe with response variables calculated every centimeter to 2 meters soil depth
+
+```{r data_fill_1, echo=TRUE}
+ExpectDatRows <- 200
+datasets <- #names of dummy datasets from import function tested above
+soil_test <- Data_fill(datasets)
+if(nrow(soil_test) == ExpectDatRows)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+```
 
 
 ##Tests for soil_stats function
@@ -52,7 +71,7 @@ source("Soil_Stats_function.R")
 
 ###Test that soil_stats makes dataframe of correct dimensions
 ```{r soil_stats_1, echo=TRUE}
-ExpectRowsSoil <- 12
+ExpectRowsSoil <- 200
 ExpectColsSoil <- 5
 testStats <- soil_stats(test)
 if(ncol(testStats) == ExpectColsSoil && nrow(testStats) == ExpectRowsSoil)
