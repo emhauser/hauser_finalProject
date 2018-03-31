@@ -1,16 +1,17 @@
 ##DataImportFunction##
-#This is a function to scrape a datatable from a pdf and append the data to an existing .csv file. 
-#The two datasets will be merged according to common columns of 'land use' and 'site'
-#The function will return a single dataframe with columns from both the pdf and the .csv
+#This is a function to import multiple .csv files for use in one correlation analysis. 
+#Datasets will each be named and stored as new R objects 
+#The function will return a dataframe from all .csv files
 
 #Args
-  #csv : calls the name of the csv file to import
-  #pdf : calls pdf for data scraping
+  #csv : calls the names of the csv file to import. May be a single csv or a vector of csv files
 
-data_import <- function(csv, pdf)
+data_import <- function(csv)
 {
-  #soilDat <- read.csv(csv)
-  #soilPdf <- scrape table from pdf. This may become its own function that occurs before this function after attempts at coding.
-  #soilDatFrame <- merge soilDat and soil Pdf (either with merge() or append() most likely)
-  #return(SoilDatFrame)
+ #for(set in CSVvector)
+  {
+  #soilDatFrame <- read.csv(csv)
+  #name(soilDatFrame[set]) <- "set" #here give each dataframe its own name
+  #return(SoilDatFrame[set])
+  }
 }

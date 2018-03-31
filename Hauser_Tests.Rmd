@@ -14,7 +14,8 @@ source("Data_Import_Function.R")
 
 ###Test if data_import makes a data.frame object
 ```{r DataImport_Test, echo=TRUE}
-test <- data_import("NameOfCSV", "PDFData")
+NameOfCSV <- dummy.csv.file
+test <- data_import("NameOfCSV")
 if(typeof(test) == data.frame)
 {
   print("passed")
@@ -29,7 +30,7 @@ if(typeof(test) == data.frame)
 ```{r DataImport_Test_2, echo=TRUE}
 ExpectRows <- 42
 ExpectCols <- 16
-test <- data_import("NameOfCSV", "PDFData")
+test <- data_import("NameOfCSV")
 if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
 {
   print("passed")
@@ -38,6 +39,9 @@ if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
   print("failed")
 }
 ```
+
+
+
 
 
 ##Tests for soil_stats function
