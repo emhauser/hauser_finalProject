@@ -14,20 +14,26 @@ Plant rooting systems have numerous mechanisms by which they obtain nutrients fr
 
 #Methods  
 ##Study site
-I will conduct this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests. As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion 
+I will conduct this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests (Fig. 1). As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion. 
+
+```{r, echo = F, fig.cap="Figure 1. Map of Critical Zone Observatories across the United States.", fig.height=.5, fig.width=1}
+knitr::include_graphics("http://criticalzone.org/images/made/images/remote/https_criticalzone.org/images/national/photos-and-images/1National/CZOmap_900_508_80auto.jpg", dpi=100)
+help(include_graphics)
+```
 
 ##Data Collection
+From X forest replicates researchers collected soil samples from paired un-altered and post-agricultural field sites. Soils were analyzed for extractable organic C (EOC)--a proxy for organic acid concentration--in every soil horizon, root density in every square centimeter of soil depth, several fractions of organic and inorganic P that have varying degrees of availability as described by the Hedley (1982) fractionation method, and acid phosphatase activity at 5 fixed soil depths. For this analysis, I will restrict my computation to data from the first 2 meters of soil depth, as not all datasets include data beyond this depth. 
 
-
-##Statistical analyses
-#Topmost Design
-  First I will need to import the data. Some of my data is measured at more depths, such that I do not have the same number of measurements at each depth in a sampled soil profile. I would like to make a function that imports the data, makes a smoothed curve, and uses this curve to extrapolate values of response variables between actual sampling points. First, I will have a function `data_import` that takes arguments specifying the csv(s) to import, which will return dataframes of each response variable, `data_import <- function(pdf,csv)`. I will then have a function 'soil_extrapolate <- function(datSet)` that will be looped over the datasets to make a smoothed curve of each response variable, extrapolate values at each cm depth interval, and return a dataframe of all the response variables generated from vectors produced in the loop.
+##Computational analyses
+  First I will import the data using the `data_import()` function. This function takes arguments specifying the csv(s) to import, which will return dataframes of each response variable, `data_import <- function(csv)`. 
   
-Once the data is imported, I will want to correlate all the P-fractions of interest with each root exudate type as well as the ratio of exudate types. I have 4 P-fractions and 3 exudates (including the exudate ratio) each sampled in 2 land use types at multiple soil depths. This might have a function `soil_stats <- function(P-fract, exudates)` in which you can specify the P-fractions of interest, in case you do not want to see all of them, and the exudates of interest. This function will find a correlation for each data point as well as the correlations of the mean values calculated according to depths and land use types. It will return the correlations in a table that also denotes the soil sampling site and depth. 
-
-With these correlations, I would like to examine the patterns of correlation across soil depth and landuse type. For this, I would like to make plots showing soil depth vs. correlation between P-fraction and exudate for each land use type. For this I might want `soil_plot <- function(relate, landuse)` into which I specify which of the relationships from the `soil_corr` table I want to plot against soil depth, as well as the land use type of interest for the plot. The landuse argument will be able to take multiple arguments such that the hardwood landuse and the pine forest land use can be plotted on the same soil depth graph. 
+  Some data is measured at fewer depth points than others, such that I do not have the same number of measurements at each depth in any given sampled soil profile. To model expected values at every depth in the soil profile, thereby filling out each response variable dataset, I will use the function `soil_extrapolate()`. This function--`soil_extrapolate <- function(datSet)`--will be looped over the datasets to make a smoothed curve of each response variable. Then it will extrapolate values at each cm depth interval, and return a dataframe of all the response variables generated from vectors produced in the loop.
   
-#Results
+Once datasets are interpolated and organized, I will correlate all the P-fractions of interest with each root exudate type, the ratio of exudate types, and root density. I have 8 P-fractions and 3 exudates (including the exudate ratio) each sampled in 2 land use types at multiple soil depths. This analysis will call the function `soil_stats <- function(P-fract, exudates)` in which you can specify the P-fractions of interest, in case you do not want to see all of them, and the exudates of interest. This function will find a correlation for each data point as well as the correlations of the mean values calculated according to depths and land use types. It will return the correlations in a table that also denotes the soil sampling site and depth. 
+
+Using the correlations produced by `soil_stats()`, I will examine the patterns of correlation across soil depth and landuse type. For this, I will make plots showing soil depth vs. correlation between P-fraction and exudate for each land use type. For this I will use `soil_plot <- function(relate, landuse)` into which I specify which of the relationships from the `soil_corr` table I want to plot against soil depth, as well as the land use type of interest for the plot. The landuse argument will be able to take multiple arguments such that the hardwood landuse and the pine forest land use can be plotted on the same soil depth graph. 
+  
+#Preliminary Results
 #Discussion
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
