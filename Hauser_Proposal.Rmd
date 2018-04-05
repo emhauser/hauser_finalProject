@@ -6,10 +6,20 @@ params:
 #bibliography: HW2_Refs.bib
 output: html_document
 ---
+#Abstract
+#Introduction
+Plant rooting systems have numerous mechanisms by which they obtain nutrients from soils. These mechanisms include increased root exploration of soil volumes, root hair proliferation, and the exudation of carbon(C)-based compounds, known as rooting system exudates, that may enhance nutrient availability when released into the soil profile (Marschner and Rengel 2007). Rooting system exudates perform differing chemical reactions in the soil matrix, which may alter the nutrient benefits recieved by the plant for its root-C investment (Smith 1976). For example, enzyme exudates release nutrient ions by cleaving monomers from organic matter, while organic acid exudates liberate nutrient ions via ligand exchange and desorption reactions with mineral surfaces (Bunemann 2011, Sato and Comerford 2006). Thus, one might expect to see greater production of acid exudates where nutrients are present in mineral forms and greater production of enzymes where organic matter dominates soil nutrient pools. However, these exudates require differing amounts of fixed plant C to produce, such that root systems may alter their belowground C allocation strategy to maximize nutrient gains for plant C-resource inputs. 
+  The nutrient phosphorous (P) is an ideal model to examine these hypotheses because it is a critical plant nutrient that is available only from soil minerals until its incorporation into organic matter (Vitousek et al. 1997). This dichotomous nature permits examination of variations in plant root C allocation in response to mineral vs. organic nutrient pools. 
+  Using extant soil chemistry and root density datasets compiled from the Calhoun Critical Zone Observoratory, I propose to examine the correlations between different soil phosphorus fractions, plant root density, and the carbon-based root exudates present in those same soils. This will allow for determination of plant investment in nutrient acquisition from organic vs. mineral nutrient pools across soil depth in ecosystems known to have differing land use histories. As such, this study will illuminate how human-driven changes in soil organic matter and mineral nutrient content alters the fate of fixed plant C in belowground systems. 
 
-#Project Goal:
-  Examine the correlation between different different soil phosphorus fractions, plant root density, and the carbon-based root exudates present in those same soils. This will allow for determination of plant investment in certain nutrient pools at different soil depths. 
-  
+#Methods  
+##Study site
+I will conduct this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests. As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion 
+
+##Data Collection
+
+
+##Statistical analyses
 #Topmost Design
   First I will need to import the data. Some of my data is measured at more depths, such that I do not have the same number of measurements at each depth in a sampled soil profile. I would like to make a function that imports the data, makes a smoothed curve, and uses this curve to extrapolate values of response variables between actual sampling points. First, I will have a function `data_import` that takes arguments specifying the csv(s) to import, which will return dataframes of each response variable, `data_import <- function(pdf,csv)`. I will then have a function 'soil_extrapolate <- function(datSet)` that will be looped over the datasets to make a smoothed curve of each response variable, extrapolate values at each cm depth interval, and return a dataframe of all the response variables generated from vectors produced in the loop.
   
@@ -17,26 +27,8 @@ Once the data is imported, I will want to correlate all the P-fractions of inter
 
 With these correlations, I would like to examine the patterns of correlation across soil depth and landuse type. For this, I would like to make plots showing soil depth vs. correlation between P-fraction and exudate for each land use type. For this I might want `soil_plot <- function(relate, landuse)` into which I specify which of the relationships from the `soil_corr` table I want to plot against soil depth, as well as the land use type of interest for the plot. The landuse argument will be able to take multiple arguments such that the hardwood landuse and the pine forest land use can be plotted on the same soil depth graph. 
   
+#Results
+#Discussion
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
