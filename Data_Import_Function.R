@@ -4,35 +4,20 @@
 #The function will return dataframes from all .csv files. Each dataframe will have its own name.
 
 #Args
-  #csv : calls the names of the csv files to import. May be a single csv or a vector of csv files
-
-help("list.files")
-data_import <- function(csv)
+  #workingDIR : calls the working directory where all .csv files to be run in the analysis are stored.
+workingD1 <- ("/Users/lindaparsons/Google Drive/KU Info/Spring 2018/DataCapentry_EnvironmentalInformatics/hauser_finalProject")
+data_import <- function(folder = workingD1)
 {
-  {
+    setwd(workingDIR)
     filenames <- list.files(pattern=".*csv")
-filenames
-    ##Create list of data frame names without the ".csv" part 
-    names <-substr(filenames,1,3)
-    names
+    numfiles <- length(filenames)
+    dfnames <- substr(filenames,1,5) 
 
     ###Load all files
-    for(i in names)
+    for(set in 1:numfiles)
       {
-          filepath <- file.path(paste(i,".csv",sep=""))
-          assign(i, read.delim(filepath,
-                       colClasses=c("character","factor",rep("numeric",4)),
-                       sep = "\t"))
-          for(i in names)
-          {
-            oname = paste(i, sep="")
-            assign(oname, read.csv(paste(oname, ".txt", sep="")))
-          }
+      assign(paste0(dfnames[set]), read.csv(filenames[set], header = T))
       }
-  }
 }
-  soilDatFrame <- read.csv(csv)
-  
-  #return(SoilDatFrame[set])
-  }
-}
+data_import()
+
