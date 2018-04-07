@@ -12,11 +12,12 @@ output: html_document
 source("Data_Import_Function.R")
 ```
 
-###Test if data_import makes data.frame objects
+###Test if data_import makes data.frame objects in the environment 
 ```{r DataImport_Test, echo=TRUE}
-NameOfCSV <- c("dummy.csv.file1","dummy.csv.file2")
-test <- data_import("NameOfCSV")
-if(typeof(test) == data.frame)
+numsets <- 2 #If I try to import 2 datasets, the import function should bring in 2 new objects. There will be other objects in the enviroment that come with the function, but always more than the number of datasets.
+NameOfWorkingDir <- "~/Google Drive/KU Info/Spring 2018/DataCapentry_EnvironmentalInformatics/hauser_finalProject"
+test <- data_import(NameOfWorkingDir)
+if(length(ls()) > numsets )
 {
   print("passed")
 }else
@@ -25,23 +26,7 @@ if(typeof(test) == data.frame)
 }
 ```
 
-###Test that data_import makes dataframes of correct dimensions
-
-```{r DataImport_Test_2, echo=TRUE}
-ExpectRows <- 42
-ExpectCols <- 16
-test <- data_import("NameOfCSV[1]")
-if(ncol(test) == ExpectCols && nrow(test) == ExpectRows)
-{
-  print("passed")
-}else
-{
-  print("failed")
-}
-```
-
-
-##Test for Data_fill function
+##Test for Data_fill function and Data Extrapolation
 
 ```{r Data_Extrapolate_sourced, echo=T}
 source("Data_Extrapolate_Function.R")
@@ -50,16 +35,32 @@ source("Data_Extrapolate_Function.R")
 ###Test that function produces a dataframe with response variables calculated every centimeter to 2 meters soil depth
 
 ```{r data_fill_1, echo=TRUE}
-ExpectDatRows <- 200
-datasets <- #names of dummy datasets from import function tested above
-soil_test <- Data_fill(datasets)
-if(nrow(soil_test) == ExpectDatRows)
+ExpectDatRows <- 172
+ExpectDatCols <- 3
+SoilSummDat <- as.data.frame(4:175)
+colnames(SoilSummDat) <- "Depth"
+SoilSummDat$Po <- data_fill(PoFra)  #These use 2 datasets from import above to make a new dataframe with interpolated values. There should be a column for each set of values in the dataframe. This tests that the data_fill function works correctly.
+SoilSummDat$EOC <- data_fill(EOC.c)
+ncol(SoilSummDat)
+ExpectDatCols
+#Check rows
+if(ncol(SoilSummDat) == ExpectDatCols)
 {
   print("passed")
 }else
 {
   print("failed")
 }
+
+#Check columns
+if(nrow(SoilSummDat) == ExpectDatRows)
+{
+  print("passed")
+}else
+{
+  print("failed")
+}
+
 ```
 
 
