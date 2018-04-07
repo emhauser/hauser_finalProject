@@ -49,31 +49,3 @@ SoilSummDat$EOC <- Dat_ext(EOC.c)
 SoilSummDat$AP <- Dat_ext(AP.cs)
 SoilSummDat$APEOC <- Dat_ext(AP.EO)
 
-
-
-
-
-
-
-
-
-
-#FIRST ATTEMPT#
-
-SoilSummDat <- as.data.frame(4:175)
-colnames(SoilSummDat) <- "Depth"
-DepthVars <- c("Depth","Depth", "mean_depth_.cm. ","mean_depth_.cm.", "mean_depth_.cm. ")
-RespVars <- c("Po.Fract", "Pi.Fract", "EOC.mgC_g.1",  "AP.mgC_g.1", "AP.EOC")
-SoilDatList
-
-x <-PFrac$Po.Fract
-y <- PFrac$Depth
-df1 <- data.frame(x,y)
-dfOrdered <- df1
-plot(x=dfOrdered$x,y=dfOrdered$y, main = "approx(.) and approxfun(.)", ylim = c(180,0))
-demo <- (approx(y=dfOrdered$x, x=dfOrdered$y, xout=seq(4,175)))
-plot(demo$x~demo$y, ylim = c(180,0))
-SoilSummDat <- cbind(SoilSummDat, demo$y)
-colnames(SoilSummDat)[2] <- "Po"
-head(SoilSummDat)
-
