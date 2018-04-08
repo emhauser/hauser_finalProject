@@ -3,7 +3,6 @@ title: "Hauser_Tests"
 author: "Emma Hauser"
 params:
   today: !r.Sys.Date
-#bibliography: HW2_Refs.bib
 output: html_document
 ---
 ##Tests for data_import function
@@ -25,24 +24,24 @@ if(length(ls()) > numsets )
   print("failed")
 }
 ```
-<!--
+
 ##Test for Data_fill function and Data Extrapolation
 
 ```{r Data_Extrapolate_sourced, echo=T}
 source("Data_Extrapolate_Function.R")
+PoFra <- read.csv("PoFract.csv")
+EOC.c <- read.csv("EOC.csv")
 ```
 
 ###Test that function produces a dataframe with response variables calculated every centimeter to 2 meters soil depth
 
-```{r data_fill_1, echo=TRUE}
+```{r data_fill_1, echo=T}
 ExpectDatRows <- 172
 ExpectDatCols <- 3
 SoilSummDat <- as.data.frame(4:175)
 colnames(SoilSummDat) <- "Depth"
 SoilSummDat$Po <- data_fill(PoFra)  #These use 2 datasets from import above to make a new dataframe with interpolated values. There should be a column for each set of values in the dataframe. This tests that the data_fill function works correctly.
 SoilSummDat$EOC <- data_fill(EOC.c)
-ncol(SoilSummDat)
-ExpectDatCols
 #Check rows
 if(ncol(SoilSummDat) == ExpectDatCols)
 {
@@ -85,20 +84,20 @@ if(testStats3 > correlRangeMin && testStats3 < correlRangeMax)
 }
 ```
 
+<!-- ##Tests for soil_plot function
+I am planning to learn additional plotting in ggplot/ggplot2 for future analyses. For now, I'm keeping things simple for my proposal and making plots though base R to show preliminary data. Once I learn ggplot graphing capabilities, I may need the following unit tests: -->
 
-##Tests for soil_plot function
-<!--I am planning to learn additional plotting in ggplot/ggplot2 for future analyses. For now, I'm keeping things simple for my proposal and making plots though base R to show preliminary data. Once I learn ggplot graphing capabilities, I may need the following unit tests:
-
-```{r Soil_plot_sourced, echo=T}
+<!--```{r Soil_plot_sourced, echo=T}
 source("SoilDataPlottingFunction.R")
 install.packages("testthat")
 library(testthat) #This test will make use of the testthat package and function, which is used for examining plot elements and expectations, particularly for graphs produced in ggplot2 
-```
+``` -->
 
 
-###Test that soil_plot function returns a ggplot object
 
-```{r soil_plot_1, echo=TRUE}
+<!--###Test that soil_plot function returns a ggplot object -->
+
+<!--```{r soil_plot_1, echo=TRUE}
 testplot <- soil_plot(test)
 
 #test_that("Plot returns ggplot object",
@@ -109,12 +108,12 @@ testplot <- soil_plot(test)
 
 #The testthat() function returns red numbered "Failure" messages with description of the problem when expectation is not met. If the test passes, the function displays a green dot. 
 #Resource for this function: https://journal.r-project.org/archive/2011/RJ-2011-002/RJ-2011-002.pdf
-```
+```-->
 
 
-###Test that soil_plot function uses correct data
+<!--###Test that soil_plot function uses correct data-->
 
-```{r soil_plot_2, echo=TRUE}
+<!--```{r soil_plot_2, echo=TRUE}
 testplot2 <- soil_plot(test)
 
 #test_that("Plot uses correct data", 
@@ -123,6 +122,5 @@ testplot2 <- soil_plot(test)
   #expect_that(testplot2, equals(test$responseData))
 #})
 
-```
--->
+```-->
 

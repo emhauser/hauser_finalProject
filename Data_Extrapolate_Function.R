@@ -41,11 +41,11 @@ return(demo$y)
 #To make a vector, I think I should do this:
 # soilDataSets <- as.vector(PiFra, PoFra, EOC.c, AP.cs, AP.EO)
   
-SoilSummDat <- as.data.frame(4:175)
-colnames(SoilSummDat) <- "Depth"
+#SoilSummDat <- as.data.frame(4:175)
+#colnames(SoilSummDat) <- "Depth"
 #SoilSummDat$Pi <- data_fill(PiFra)
-SoilSummDat$Po <- data_fill(PoFra)
-SoilSummDat$EOC <- data_fill(EOC.c)
+#SoilSummDat$Po <- data_fill(PoFra)
+#SoilSummDat$EOC <- data_fill(EOC.c)
 #SoilSummDat$AP <- data_fill(AP.cs)
 #SoilSummDat$APEOC <- data_fill(AP.EO)
-SoilSummDat
+#SoilSummDat
