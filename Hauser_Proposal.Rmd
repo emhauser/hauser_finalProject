@@ -7,34 +7,81 @@ params:
 output: html_document
 ---
 #Abstract
+ 
+
 #Introduction
-Plant rooting systems have numerous mechanisms by which they obtain nutrients from soils. These mechanisms include increased root exploration of soil volumes, root hair proliferation, and the exudation of carbon(C)-based compounds, known as rooting system exudates, that may enhance nutrient availability when released into the soil profile (Marschner and Rengel 2007). Rooting system exudates perform differing chemical reactions in the soil matrix, which may alter the nutrient benefits recieved by the plant for its root-C investment (Smith 1976). For example, enzyme exudates release nutrient ions by cleaving monomers from organic matter, while organic acid exudates liberate nutrient ions via ligand exchange and desorption reactions with mineral surfaces (Bunemann 2011, Sato and Comerford 2006). Thus, one might expect to see greater production of acid exudates where nutrients are present in mineral forms and greater production of enzymes where organic matter dominates soil nutrient pools. However, these exudates require differing amounts of fixed plant C to produce, such that root systems may alter their belowground C allocation strategy to maximize nutrient gains for plant C-resource inputs. 
-  The nutrient phosphorous (P) is an ideal model to examine these hypotheses because it is a critical plant nutrient that is available only from soil minerals until its incorporation into organic matter (Vitousek et al. 1997). This dichotomous nature permits examination of variations in plant root C allocation in response to mineral vs. organic nutrient pools. 
-  Using extant soil chemistry and root density datasets compiled from the Calhoun Critical Zone Observoratory, I propose to examine the correlations between different soil phosphorus fractions, plant root density, and the carbon-based root exudates present in those same soils. This will allow for determination of plant investment in nutrient acquisition from organic vs. mineral nutrient pools across soil depth in ecosystems known to have differing land use histories. As such, this study will illuminate how human-driven changes in soil organic matter and mineral nutrient content alters the fate of fixed plant C in belowground systems. 
+Plant rooting systems have numerous mechanisms by which they obtain nutrients from soils. These mechanisms include increased root exploration of soil volumes, root hair proliferation, and the exudation of carbon(C)-based compounds, known as rooting system exudates, that may enhance nutrient availability when released into the soil profile (@MarschnerRengel2007). Rooting system exudates perform differing chemical reactions in the soil matrix, which may alter the nutrient benefits recieved by the plant for its root-C investment (@Smith1976). For example, enzyme exudates release nutrient ions by cleaving monomers from organic matter, while organic acid exudates liberate nutrient ions via ligand exchange and desorption reactions with mineral surfaces (@Bunemann2011,@SatoComerford2006). Thus, one might expect to see greater production of acid exudates where nutrients are present in mineral forms and greater production of enzymes where organic matter dominates soil nutrient pools. However, these exudates require differing amounts of fixed plant C to produce, such that root systems may alter their belowground C allocation strategy to maximize nutrient gains for plant C-resource inputs. 
+  The nutrient phosphorous (P) is an ideal model to examine these hypotheses because it is a critical plant nutrient that is available only from soil minerals until its incorporation into organic matter (@Vitousek1997). This dichotomous nature permits examination of variations in plant root C allocation in response to mineral vs. organic nutrient pools. 
+  Using extant soil chemistry and root density datasets compiled from the Calhoun Critical Zone Observoratory, I propose to examine the correlations between different soil phosphorus fractions, plant root density, and the carbon-based root exudates present in those same soils. This will allow for determination of plant investment in nutrient acquisition from organic vs. mineral nutrient pools across soil depth in ecosystems known to have differing land use histories. As such, this study will illuminate how human-driven changes in soil organic matter and mineral nutrient content alter the fate of fixed plant C in belowground systems. 
 
 #Methods  
-##Study site
-I will conduct this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests (Fig. 1). As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion. 
+###Study site
+I am conducting this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests (Fig. 1). As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion. 
 
-```{r, echo = F, fig.cap="Figure 1. Map of Critical Zone Observatories across the United States.", fig.height=.5, fig.width=1}
-knitr::include_graphics("http://criticalzone.org/images/made/images/remote/https_criticalzone.org/images/national/photos-and-images/1National/CZOmap_900_508_80auto.jpg", dpi=100)
-help(include_graphics)
+```{r, echo = F, fig.cap="Figure 1. A) Image of a hardwood forest soil pit sampled at the Calhoun Critical Zone Observatory. B) A similarly sampled soil pit located in a pine forest at Calhoun.", out.height="50%", out.width="50%"}
+knitr::include_graphics("https://nicholas.duke.edu/cczo/soilpits/R2H1-PROFILE-PA200226.JPG", dpi=100)
+knitr::include_graphics("https://nicholas.duke.edu/cczo/soilpits/R2P1-PROFILE-PA200224.JPG", dpi=100)
 ```
 
-##Data Collection
-From X forest replicates researchers collected soil samples from paired un-altered and post-agricultural field sites. Soils were analyzed for extractable organic C (EOC)--a proxy for organic acid concentration--in every soil horizon, root density in every square centimeter of soil depth, several fractions of organic and inorganic P that have varying degrees of availability as described by the Hedley (1982) fractionation method, and acid phosphatase activity at 5 fixed soil depths. For this analysis, I will restrict my computation to data from the first 2 meters of soil depth, as not all datasets include data beyond this depth. 
+###Data Collection
+Researchers collected soil samples from 5 forest replicates with paired un-altered and post-agricultural field sites in each replicate. Soils were analyzed for extractable organic C (EOC)--a proxy for organic acid concentration--in every soil horizon, root density in every square centimeter of soil depth, several fractions of organic and inorganic P that have varying degrees of availability as described by the Hedley (@Hedley1982) fractionation method, and acid phosphatase activity at 5 fixed soil depths. For this analysis, I will restrict my computation to data from the first 2 meters of soil depth, as not all datasets include data beyond this depth.
 
-##Computational analyses
-  First I will import the data using the `data_import()` function. This function takes arguments specifying the csv(s) to import, which will return dataframes of each response variable, `data_import <- function(workingDIR)`. 
+###Computational analyses
+  First I will import the data using the `data_import()` function. This function takes an argument specifying the working directory, and returns a dataframe for each response variable for which the user has made as a .csv file in the working directory, `data_import <- function(workingDIR)`. 
   
   Some data is measured at fewer depth points than others, such that I do not have the same number of measurements at each depth in any given sampled soil profile. To model expected values at every depth in the soil profile, thereby filling out each response variable dataset, I will use the function `soil_extrapolate()`. This function--`soil_extrapolate <- function(datSet)`--will be looped over the datasets to make a smoothed curve of each response variable. Then it will extrapolate values at each cm depth interval, and return a dataframe of all the response variables generated from vectors produced in the loop.
   
-Once datasets are interpolated and organized, I will correlate all the P-fractions of interest with each root exudate type, the ratio of exudate types, and root density. I have 8 P-fractions and 3 exudates (including the exudate ratio) each sampled in 2 land use types at multiple soil depths. This analysis will call the function `soil_stats <- function(P-fract, exudates)` in which you can specify the P-fractions of interest, in case you do not want to see all of them, and the exudates of interest. This function will find a correlation for each data point as well as the correlations of the mean values calculated according to depths and land use types. It will return the correlations in a table that also denotes the soil sampling site and depth. 
+Once datasets are interpolated and organized, I will correlate all the P-fractions of interest with each root exudate type, the ratio of exudate types, and root density. I have 8 P-fractions and 3 exudates (including the exudate ratio) each sampled in 2 land use types at multiple soil depths. This analysis will call the function `soil_stats <- function(P-fract, exudates)` in which the user can specify the P-fractions of interest and the exudates of interest. This function will find a correlation for each data point as well as the correlations of the mean values calculated according to depths and land use types. It will return the correlations in a table that also denotes the soil sampling site and depth. 
 
-Using the correlations produced by `soil_stats()`, I will examine the patterns of correlation across soil depth and landuse type. For this, I will make plots showing soil depth vs. correlation between P-fraction and exudate for each land use type. For this I will use `soil_plot <- function(relate, landuse)` into which I specify which of the relationships from the `soil_stats` table I want to plot against soil depth, as well as the land use type of interest for the plot. The landuse argument will be able to take multiple arguments such that the hardwood landuse and the pine forest land use can be plotted on the same soil depth graph. 
+Using the correlations produced by `soil_stats()`, I will examine the patterns of correlation across soil depth and landuse type. For this, I will make plots showing soil depth vs. correlation between P-fraction and exudate for each land use type. I will develop the function `soil_plot <- function(relate, landuse)` into which I specify which of the relationships from the `soil_stats` table I want to plot against soil depth, as well as the land use type of interest for the plot. The landuse argument will be able to take multiple arguments such that the hardwood landuse and the pine forest land use can be plotted on the same soil depth graph. 
   
 #Preliminary Results
-#Discussion
+
+<!--A chunk to set up data and Rmd settings for prelim data analyses--> 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+#source("Data_Import_Function.R")
+source("Data_Extrapolate_Function.R")
+source("Soil_Stats_function.R")
+#Note: I have been continuing to have trouble with my Data_Import function, so I am also loading some of the files here to make sure the proposal script will knit. Once I debug the Data_Import function, I should not need the read.csv lines of code below.
 ```
+
+<!--A chunk to make prelim results plots-->
+```{r prelim, echo=FALSE, fig.cap= "Figure 2. Plots of soil phosphorus and soil carbon fractions with depth in hardwood profiles sampled at the Calhoun Experimental forest. Graphs show organic P, inorganic P, extractable organic carbon, and carbon allocated to the P-mobilizing enzyme phosphatase."}
+#Make graphs of several P and C responses of interest
+par(mfrow=c(2,2))
+PoFra <- read.csv("PoFract.csv")
+PiFra <- read.csv("PiFract.csv")
+EOC <- read.csv("EOC.csv")
+AP <- read.csv("AP.csv")
+data_fill(PoFra, xlab = "Organic Phosphorus (mgP/kg soil)", datReturn = F)
+data_fill(PiFra, xlab = "Inorganic Phosphorus (mgP/kg soil)", datReturn = F)
+data_fill(EOC, xlab = "Extractable Organic Carbon (mgC/g soil)", datReturn = F)
+data_fill(AP, xlab = "Acid Phosphatase Carbon (mgC/g soil)", datReturn = F)
+```
+
+<!--A chunk to make a dataframe that contains all 4 extrapolated datasets-->
+```{r SetUpData, include=FALSE}
+#Make dataframe of interpolated values
+SoilSummDat <- as.data.frame(4:175)
+colnames(SoilSummDat) <- "Depth"
+SoilSummDat$Pi <- data_fill(PiFra, datReturn = T)
+SoilSummDat$Po <- data_fill(PoFra, datReturn = T)
+SoilSummDat$EOC <- data_fill(EOC, datReturn = T)
+SoilSummDat$AP <- data_fill(AP, datReturn = T)
+soildat <- SoilSummDat[42:172, ]
+PoAP <- soil_stats_simple(soildat$Po, soildat$AP)
+PiEOC <- soil_stats_simple(soildat$Pi, soildat$EOC)
+
+#Code I will need for inline r below:
+#PoAP$p.value
+#PoAP$estimate
+#PiEOC$p.value
+#PiEOC$estimate
+```
+
+With increasing soil depth, data shows that organic P (Po) declines, while inorganic P (Pi) increases (Fig. 2). Extractable organic C (EOC)--a proxy for organic acid exudates that preform P-releasing reactions with P-containing minerals--declines with depth, while C allocation to acid phosphatase (AP) enzymes that mobilize P from organic molecules show inconsistent distributions (Fig. 2). Acid phosphatase appears to show a strong negative correlation with Po pools (R =`r PoAP$estimate`, p = `r PoAP$p.value`). Although EOC appears to show a negative correlation with Pi (R =`r PiEOC$estimate`, p = `r PiEOC$p.value`), the relationship between EOC and Pi appears to be weaker than the relationship between Po and AP. 
+
+#Discussion
+Recent studies suggest that plants allocate their C resources to nutrient acquisition in ways that maximize the nutrient return on C investment (@LynchandHo2005). Therefore, we might expect that roots would exude relatively more organic acid exudates in the presence of inorganic, P-bearing minerals, while acid phosphatse enzymes would be exuded in the presence of P-containing organic matter. However, preliminary simplified analyses show negative correlations between Po and AP, as well as Pi and EOC. Some authors posit that root exudate production is a response to low nutrient availability, such that increasing nutrient pools of either form may lessen the presence of C-exudates in the soil profile (@BeverandJi2016). My early analyses may support this latter hypothesis. 
+  In addition, the strength of correlation between EOC and soil P pools may be weaker than the correlation between AP and soil P pools because AP performs a very specific function while EOC and organic acids can have wide-ranging effects. Therefore, organic acid concentrations may be more strongly correlated to other soil variables. It is important to note, however, that this proposal relies on a very small subset of Calhoun soil data. A more robust analysis will include multiple land use types (here, only hardwood forests are investigated), as well as more replicates. The presence of both expected and unexpected trends in preliminary analyses suggest that these relationships warrant further investigation. 

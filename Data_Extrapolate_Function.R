@@ -6,6 +6,8 @@
 
 #Args:
   #soilDatSet: This is a dataframe from which the user is extrapolating datapoints via linear interpolation
+  #datReturn: gives user the option to return and view the complete data vector. If datReturn = F, the function only returns a data plot.
+  #... : allows the user to specify arguments for plot parameters, such as axis labels and colors. 
 
 #Initial pseudocode:
 #Data_Fill <- function(soilDatSets=SoilDatList)
@@ -24,17 +26,21 @@
 
 
 #Function that produces a plot and a set of response variable points generated using linear interpolation between sampled datapoints, as well as a plot of extrapolated and measured points.
-data_fill <- function (soilDatSet)
+data_fill <- function (soilDatSet, datReturn, ...)
 {
   x <-soilDatSet[,2]
   y <- soilDatSet[,1]
 df1 <- data.frame(x,y)
 dfOrdered <- df1
-plot(x=dfOrdered$x,y=dfOrdered$y, main = "approx(.) and approxfun(.)", ylim = c(180,0))
+plot(x=dfOrdered$x,y=dfOrdered$y,col="red", pch = 19, ylab = "Soil Depth (cm)", xlab = ..., ylim = c(180,0))
 demo <- (approx(y=dfOrdered$x, x=dfOrdered$y, xout=seq(4,175)))
-plot(demo$x~demo$y, ylim = c(180,0))
-return(demo$y)
+points(demo$x~demo$y, pch = 1, cex = 0.5, ylim = c(180,0))
+  if(datReturn == T)
+    {
+      return(demo$y)
+    }
 }
+
 
 #Then Produce a dataframe with each extrapolated response variable
 #This could be more modular. I need to make my dataframes into a vector. However, I'm having trouble getting my function to run when I do this.

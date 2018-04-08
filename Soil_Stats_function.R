@@ -38,20 +38,19 @@
 #var1: first variable of interest, any of the P datasets
 #var2: response var to correlate with var1. This will be one of the C datasets.
 
-#SoilSummDat <- as.data.frame(4:175)
-#colnames(SoilSummDat) <- "Depth"
-#SoilSummDat$Pi <- data_fill(PiFra)
-#SoilSummDat$Po <- data_fill(PoFra)
-#SoilSummDat$EOC <- data_fill(EOC.c)
-#SoilSummDat$AP <- data_fill(AP.cs)
-#SoilSummDat$APEOC <- data_fill(AP.EO)
-
-soildat <- SoilSummDat[42:172,]
 
 soil_stats_simple <- function(var1, var2)
 {
-  correl <- cor(x=var1, y = var2)
+  correl <- cor.test(x=var1, y = var2)
   return(correl)
 }
 
-
+#Proposed dataframe from data_fill function. This will be used with soil_stats function:
+#SoilSummDat <- as.data.frame(4:175)
+#colnames(SoilSummDat) <- "Depth"
+#SoilSummDat$Pi <- data_fill(PiFra, datReturn = T)
+#SoilSummDat$Po <- data_fill(PoFra, datReturn = T)
+#SoilSummDat$EOC <- data_fill(EOC, datReturn = T)
+#SoilSummDat$AP <- data_fill(AP, datReturn = T)
+#SoilSummDat$APEOC <- data_fill(AP.EO)
+#soildat <- SoilSummDat[42:172, ]
