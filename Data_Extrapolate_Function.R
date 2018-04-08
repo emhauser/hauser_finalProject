@@ -43,9 +43,9 @@ return(demo$y)
   
 SoilSummDat <- as.data.frame(4:175)
 colnames(SoilSummDat) <- "Depth"
-SoilSummDat$Pi <- data_fill(PiFra)
+#SoilSummDat$Pi <- data_fill(PiFra)
 SoilSummDat$Po <- data_fill(PoFra)
 SoilSummDat$EOC <- data_fill(EOC.c)
-SoilSummDat$AP <- data_fill(AP.cs)
-SoilSummDat$APEOC <- data_fill(AP.EO)
-
+#SoilSummDat$AP <- data_fill(AP.cs)
+#SoilSummDat$APEOC <- data_fill(AP.EO)
+SoilSummDat

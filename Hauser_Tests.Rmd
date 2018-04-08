@@ -25,7 +25,7 @@ if(length(ls()) > numsets )
   print("failed")
 }
 ```
-
+<!--
 ##Test for Data_fill function and Data Extrapolation
 
 ```{r Data_Extrapolate_sourced, echo=T}
@@ -70,41 +70,13 @@ if(nrow(SoilSummDat) == ExpectDatRows)
 source("Soil_Stats_function.R")
 ```
 
-###Test that soil_stats makes dataframe of correct dimensions
-```{r soil_stats_1, echo=TRUE}
-ExpectRowsSoil <- 200
-ExpectColsSoil <- 5
-testStats <- soil_stats(test)
-if(ncol(testStats) == ExpectColsSoil && nrow(testStats) == ExpectRowsSoil)
-{
-  print("passed")
-}else
-{
-  print("failed")
-}
-```
-
-###Test that soil_stats calculates means correctly
-
-```{r soil_stats_2, echo=TRUE}
-ExpectMean <- 4.713 #this is the first mean, which should be in the first column of response variables, column 3, row 1
-testStats2 <- soil_stats(test)
-if(testStats2[1,3]==ExpectMean)
-{
-  print("passed")
-}else
-{
-  print("failed")
-}
-```
-
 ###Test that soil_stats calculates realistic correlation value
 
-```{r soil_stats_3, echo=TRUE}
+```{r soil_stats, echo=TRUE}
 correlRangeMin <- -1
 correlRangeMax <- 1
-testStats3 <- soil_stats(test)
-if(testStats3[,5] > correlRangeMin && testStats3[,5] < correlRangeMax)
+testStats3 <- soil_stats_simple(var1 = soildat$Po, var2 = soildat$EOC)
+if(testStats3 > correlRangeMin && testStats3 < correlRangeMax)
 {
   print("passed")
 }else
@@ -115,6 +87,7 @@ if(testStats3[,5] > correlRangeMin && testStats3[,5] < correlRangeMax)
 
 
 ##Tests for soil_plot function
+<!--I am planning to learn additional plotting in ggplot/ggplot2 for future analyses. For now, I'm keeping things simple for my proposal and making plots though base R to show preliminary data. Once I learn ggplot graphing capabilities, I may need the following unit tests:
 
 ```{r Soil_plot_sourced, echo=T}
 source("SoilDataPlottingFunction.R")
@@ -151,3 +124,5 @@ testplot2 <- soil_plot(test)
 #})
 
 ```
+-->
+
