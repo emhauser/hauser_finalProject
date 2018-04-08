@@ -37,12 +37,12 @@ EOC.c <- read.csv("EOC.csv")
 
 ```{r data_fill_1, echo=T}
 ExpectDatRows <- 172
-ExpectDatCols <- 3
+ExpectDatCols <- 5
 SoilSummDat <- as.data.frame(4:175)
 colnames(SoilSummDat) <- "Depth"
-SoilSummDat$Po <- data_fill(PoFra)  #These use 2 datasets from import above to make a new dataframe with interpolated values. There should be a column for each set of values in the dataframe. This tests that the data_fill function works correctly.
-SoilSummDat$EOC <- data_fill(EOC.c)
-#Check rows
+SoilSummDat$Po <- data_fill(PoFra, datReturn = F)  #These use 2 datasets from import above to make a new dataframe with interpolated values. There should be a column for each set of values in the dataframe. This tests that the data_fill function works correctly.
+SoilSummDat$EOC <- data_fill(EOC.c, datReturn =F)
+#Check columns
 if(ncol(SoilSummDat) == ExpectDatCols)
 {
   print("passed")
@@ -51,7 +51,8 @@ if(ncol(SoilSummDat) == ExpectDatCols)
   print("failed")
 }
 
-#Check columns
+
+#Check rows
 if(nrow(SoilSummDat) == ExpectDatRows)
 {
   print("passed")
@@ -67,6 +68,12 @@ if(nrow(SoilSummDat) == ExpectDatRows)
 
 ```{r soil_stats_sourced, echo=T}
 source("Soil_Stats_function.R")
+#Make simple dataframe with soil_stats_simple
+SoilSummDat <- as.data.frame(4:175)
+colnames(SoilSummDat) <- "Depth"
+SoilSummDat$Po <- data_fill(PoFra, datReturn = T)
+SoilSummDat$EOC <- data_fill(EOC.c, datReturn = T)
+soildat <- SoilSummDat[42:172, ]
 ```
 
 ###Test that soil_stats calculates realistic correlation value
@@ -75,7 +82,7 @@ source("Soil_Stats_function.R")
 correlRangeMin <- -1
 correlRangeMax <- 1
 testStats3 <- soil_stats_simple(var1 = soildat$Po, var2 = soildat$EOC)
-if(testStats3 > correlRangeMin && testStats3 < correlRangeMax)
+if(testStats3$p.value > correlRangeMin && testStats3$p.value < correlRangeMax)
 {
   print("passed")
 }else
