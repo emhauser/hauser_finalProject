@@ -18,7 +18,7 @@ Plant rooting systems have numerous mechanisms by which they obtain nutrients fr
 ###Study site
 I am conducting this study at the Calhoun Critical Zone Observatory, SC, which is home to both 200-year-old hardwood forests and ~80-year-old post-agricultural  pine forests (Fig. 1). As in most soils that do not contain buried O or A horizons, surface soils are relatively organic P(Po)-rich and harbor minerals with low P content; with increasing depth, relative abundances of mineral P (Pg) increase and Po decreases. In pine forests, Pg remains relatively high in surface horizons from agricultural erosion. 
 
-```{r, echo = F, fig.cap="Figure 1. A) Image of a hardwood forest soil pit sampled at the Calhoun Critical Zone Observatory.", out.height="50%", out.width="50%"}
+```{r, echo = F, fig.cap="Figure 1. A) Image of a hardwood forest soil pit sampled at the Calhoun Critical Zone Observatory.", out.height="50%", out.width="50%", extra.out='angle=90'}
 #Note: For some reason my Rmd keeps rotating this picture although it is vertical on the web. I'm working on figuring out how to turn it to a vertical orientation, but still haven't been successful.
 knitr::include_graphics("https://nicholas.duke.edu/cczo/soilpits/R2H1-PROFILE-PA200226.JPG")
 ```
