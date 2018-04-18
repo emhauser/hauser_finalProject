@@ -6,6 +6,22 @@ params:
 bibliography: ProposalRefs.bib
 output: html_document
 ---
+
+<!--***DAN: search for ***DAN to find my comments in all files-->
+
+<!--***DAN: I can see you have put in a whole lot of work, and scientifically this is a more-than-adequate 
+final project. It's ambitious, even - I can see and I am very happy to see you are going beyond the requirements
+of the course and applying the tools we have learned to your own data. You have also used git well and gotten the 
+right idea on making specs and unit tests in advance and then filling in the function to pass the test. So that's 
+all good. You certainly deserve a 10/10 grade for effortful completion of all parts of the assignment! That said, 
+there are many places the code can be improved and may, as it stands, be faulty. I have not been able to understand
+all of what you are attempting, and would need to ask a bunch of questions to help you improve your functions. 
+However, we can do that. After the R package module, we will spend the remainder of class time assisting you
+in doing your final projects. I suggest that you flag me down during that time and remind me of this message
+I am writing now, and we can sit and improve one function at a time. I think that process may help you generally
+as well as for this specific analysis.-->
+
+
 #Abstract
  Plant rooting systems appear to have different strategies for obtaining nutrients from organic vs. inorganic nutrient sources. Such varied strategies may have implications for how plants allocate carbon in soil ecosystems. In this study, I propose to track correlations between root-derived carbon pools and pools of inorganic and organic soil phosphorus from the Calhoun Critical Zone Observatory, SC. Preliminary analyses suggest that roots may exude less belowground carbon in the presence of increased soil P resources, but further analyses are needed to clarify whether plant rooting systems show meaningful C responses to soil P distributions. 
 

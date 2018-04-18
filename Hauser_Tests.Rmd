@@ -5,6 +5,27 @@ params:
   today: !r.Sys.Date
 output: html_document
 ---
+
+<!--***DAN: search for ***DAN to find my comments in all files-->
+
+<!--***DAN: Really great use of git! Plenty of commits, informative messages, and the halfway 
+tag was appropriately used-->
+
+<!--***DAN: At "halfway" you indeed had function specs and tests, as required, so you got 
+the point on that. Great. Some of the specs were not as precise as they could have been - see 
+comments in respective files-->
+
+<!--**DAN: your data import function attempts to retrieve data from a folder which exists on
+#your machine, but not mine. So the code is not portable to my machine, or to the machine of
+you collaborator, which is a drawback. You could handle this by putting the csv into your git repo,
+and then they would be located in the same folder as your Rmd and you could read them in, and they
+would be available to anyone who cloned your repo. If data privacy is an issue, you could use a 
+private repo. But there are other ways where data are stored in the cloud in a way that they can
+be remotely extracted by your code, too.-->
+
+<!--***DAN: You have a lot of functions, you are really putting in a lot of work here, and 
+I can see this is a real research project!-->
+
 ##Tests for data_import function
 
 ```{r Data_Import_sourced, echo=T}
@@ -12,6 +33,10 @@ source("Data_Import_Function.R")
 ```
 
 ###Test if data_import makes data.frame objects in the environment 
+<!--***DAN: for this test to function as a test seems to require that there be at least 2 datasets in 
+NameOfWorkingDir. That means you can change the test from passing to failing without changing the function
+that is supposedly being tested, just by making a change to the external directory NameOfWorkingDir.
+So this is not really an adequate test of the function itself!-->
 ```{r DataImport_Test, echo=TRUE}
 numsets <- 2 #If I try to import 2 datasets, the import function should bring in 2 new objects. There will be other objects in the enviroment that come with the function, but always more than the number of datasets.
 NameOfWorkingDir <- "~/Google Drive/KU Info/Spring 2018/DataCapentry_EnvironmentalInformatics/hauser_finalProject"

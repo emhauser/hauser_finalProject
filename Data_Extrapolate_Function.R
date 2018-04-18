@@ -3,11 +3,13 @@
 #The function will use the smoothed curve to extrapolate a soil response variable value for every centimeter in the soil profile
 #The function will store each vector of responses and merge those vectors into a single dataframe after it extrapolates all the resonse variable sets
 #The function will return a single dataframe with all the response variables. 
+#***DAN: this is a pretty good description above, but...
 
 #Args:
   #soilDatSet: This is a dataframe from which the user is extrapolating datapoints via linear interpolation
   #datReturn: gives user the option to return and view the complete data vector. If datReturn = F, the function only returns a data plot.
   #... : allows the user to specify arguments for plot parameters, such as axis labels and colors. 
+#***DAN: ... these specs should be more precise. What is the assumed format of soilDatSet?
 
 #Initial pseudocode:
 #Data_Fill <- function(soilDatSets=SoilDatList)
@@ -23,6 +25,7 @@
   #}
   #return(soilDat)
 #}
+#***DAN: I am glad you are writing pseudocode
 
 
 #Function that produces a plot and a set of response variable points generated using linear interpolation between sampled datapoints, as well as a plot of extrapolated and measured points.
